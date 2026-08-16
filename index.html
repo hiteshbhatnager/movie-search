@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Search and discover your favorite movies">
+
+    <title>MovieFinder | Search Movies</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                MovieFinder
+            </a>
+
+            <form class="search-box">
+                <input class="search-input" type="search" id="movieSearch" placeholder="Search movies..."
+                    autocomplete="off">
+
+                <button type="submit" id="searchBtn">
+                    Search
+                </button>
+            </form>
+
+            <a href="#" class="home-link">Home</a>
+
+        </nav>
+    </header>
+
+
+    <main class="main">
+
+        <section class="hero">
+            <h1>Find Your Next Movie</h1>
+            <p>Search for movies, ratings, genres and more.</p>
+        </section>
+
+        <section class="movies-section">
+
+            <div class="section-header">
+                <h2>Movies</h2>
+                <p id="resultText">Search for a movie to get started</p>
+            </div>
+
+            <div class="movie-grid" id="movieContainer">
+                <!-- Movie cards will be added using JavaScript -->
+
+                <a href="movie.html" target="_blank" rel="noopener noreferrer">
+                    <div class="movie-card">
+                        <img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"
+                            alt="Wonder Woman 1984 poster">
+
+                        <div class="movie-info">
+                            <h3 class="movie-title">Wonder Woman 1984</h3>
+
+                            <div class="movie-meta">
+                                <span>2020</span>
+                                <span>⭐ 5.4</span>
+                            </div>
+
+                            <p class="movie-genre">
+                                Action • Adventure • Fantasy
+                            </p>
+                        </div>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+        <p>© 2026 MovieFinder. Built with JavaScript.</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
