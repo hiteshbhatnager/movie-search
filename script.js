@@ -1,14 +1,25 @@
+
 const searchBox = document.querySelector(".search-input")
 const movieList = document.querySelector(".movie-grid")
+API_KEY = "38206dc3"
 
-searchBox.addEventListener('change', (e) => {
-    console.log(e.target.value)
+let wait;
+
+searchBox.addEventListener('input', (e) => {
+    clearTimeout(wait)
+    let value = e.target.value
+
+    wait = setTimeout(() => {
+        if (value) {
+            api(value)
+        }
+    }, 900)
 })
 
-function api() {
-    fetch(``)
+function api(movie) {
+    fetch(`https://omdbapi.com/?s=${movie}&apikey=${API_KEY}`)
         .then((res) => res.json())
-        .then((res) => { render(res) })
+        .then((res) => { console.log(res.Search) })
 }
 
 function render() {
