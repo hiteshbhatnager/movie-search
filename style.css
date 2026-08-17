@@ -149,6 +149,12 @@ body {
     line-height: 1.4;
 }
 
+.not-found {
+    color: rgb(158, 11, 11);
+    text-align: center;
+    width: 100%;
+}
+
 
 /* =========================
    HERO
