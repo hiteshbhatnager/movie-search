@@ -1,6 +1,8 @@
 const searchBox = document.querySelector(".search-input")
 const grid = document.querySelector(".movie-grid")
-API_KEY = "38206dc3"
+const home = document.querySelector(".home-link")
+const searchBtn = document.querySelector("#searchBtn")
+const API_KEY = "38206dc3"
 
 let wait;
 
@@ -19,14 +21,10 @@ searchBox.addEventListener('input', (e) => {
 function api(movie) {
     fetch(`https://omdbapi.com/?s=${movie}&apikey=${API_KEY}`)
         .then((res) => res.json())
-        .then((res) => { render(res, movie) })
-}
-
-function render(data, value) {
-    const movieList = data.Search?.map((movie) => (
-        `<div class="movie ${movie.Title}" >
-        <a href="movie.html" target="_blank" rel="noopener noreferrer">
-                <div class="movie-card">
+        .then((res) => {
+            const movieList = res.Search?.map((movie) => (
+                `
+                <div class="movie-card" >
                     <img src="${movie.Poster}"
                         alt="${movie.Title}">
 
@@ -43,19 +41,85 @@ function render(data, value) {
                         </p>
                     </div>
                 </div>
+            `
+            )).join("")
+            if (movieList) {
+                grid.innerHTML = movieList
+            } else {
+                grid.innerHTML = `<div class="not-found">${movie} not exist</div>`
+            }
 
-            </a>
-            </div>`
-    )).join("")
-    if (movieList) {
-        grid.innerHTML = movieList
-    } else {
-        grid.innerHTML = `<div class="not-found">${value} not exist</div>`
-    }
-
-    searchBox.value = ""
+            searchBox.value = ""
+        })
 }
 
-grid.addEventListener("click", (e) => {
-    console.log(e.target.closest('div'))
+home.addEventListener('click', () => {
+    grid.innerHTML = ""
+    searchBox.focus()
 })
+
+searchBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchBox.focus();
+});
+
+grid.addEventListener("click", (e) => {
+    if (!element) return;
+    let element = e.target.closest('.movie-card')
+    renderMovie(element)
+})
+
+function renderMovie(element) {
+    fetch(`https://omdbapi.com/?t=${element.classList[1]}&apikey=${API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+            const detial = `<main class="movie-details">
+        <section class="movie-container" id="movieContainer">
+            <div class="movie-poster">
+                <img id="${data.Poster}" src="${data.Poster}" alt="${data.Poster}">
+            </div>
+            <div class="movie-content">
+                <h1 id="movieTitle">
+                    ${data.Title}
+                </h1>
+                <div class="movie-meta">
+                    <span id="movieYear">
+                        ${data.Year}
+                    </span>
+                    <span id="movieRating">
+                        ⭐ ${data.imdbRating}
+                    </span>
+                    <span id="movieRuntime">
+                        ${data.Runtime}
+                    </span>
+                </div>
+                <p class="movie-genre" id="movieGenre">
+                    ${data.Genre}
+                </p>
+                <p class="movie-plot" id="moviePlot">
+                    ${data.Plot}
+                </p>
+                <div class="movie-info-list">
+                    <p>
+                        <strong>Director:${data.Director}</strong>
+                        <span id="movieDirector">-</span>
+                    </p>
+                    <p>
+                        <strong>Actors:${data.Actors}</strong>
+                        <span id="movieActors">-</span>
+                    </p>
+                    <p>
+                        <strong>Language:${data.Language}</strong>
+                        <span id="movieLanguage">-</span>
+                    </p>
+                    <p>
+                        <strong>Country:${data.Country}</strong>
+                        <span id="movieCountry">-</span>
+                    </p>
+                </div>
+            </div>
+        </section>`
+
+            grid.innerHTML = detial
+        })
+}
