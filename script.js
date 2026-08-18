@@ -24,7 +24,7 @@ function api(movie) {
         .then((res) => {
             const movieList = res.Search?.map((movie) => (
                 `
-                <div class="movie-card" >
+                <div class="movie-card" data-id="${movie.imdbID}" >
                     <img src="${movie.Poster}"
                         alt="${movie.Title}">
 
@@ -64,13 +64,13 @@ searchBtn.addEventListener("click", (e) => {
 });
 
 grid.addEventListener("click", (e) => {
-    if (!element) return;
     let element = e.target.closest('.movie-card')
+    if (!element) return;
     renderMovie(element)
 })
 
 function renderMovie(element) {
-    fetch(`https://omdbapi.com/?t=${element.classList[1]}&apikey=${API_KEY}`)
+    fetch(`https://omdbapi.com/?i=${element.dataset.id}&apikey=${API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
             const detial = `<main class="movie-details">
