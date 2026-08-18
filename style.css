@@ -1,3 +1,13 @@
+/* =========================================================
+   MOVIEFINDER - COMPLETE STYLESHEET
+   Homepage + Search + Movie Details + Responsive Design
+========================================================= */
+
+
+/* =========================================================
+   1. GLOBAL RESET
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,44 +20,56 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+
     background: #0f1117;
     color: #ffffff;
+
     min-height: 100vh;
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* =========================================================
+   2. HEADER / NAVBAR
+========================================================= */
 
 .header {
     position: sticky;
     top: 0;
     z-index: 100;
 
-    background: #151821;
+    background: rgba(21, 24, 33, 0.95);
+
     border-bottom: 1px solid #252936;
+
+    backdrop-filter: blur(12px);
 }
 
 .navbar {
     width: min(1200px, 92%);
     min-height: 70px;
+
     margin: auto;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 30px;
 }
 
 
-/* LOGO */
+/* =========================================================
+   3. LOGO
+========================================================= */
 
 .logo {
     color: #ffffff;
+
     text-decoration: none;
+
     font-size: 1.5rem;
     font-weight: 700;
+
     white-space: nowrap;
 }
 
@@ -56,9 +78,9 @@ body {
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+/* =========================================================
+   4. SEARCH BOX
+========================================================= */
 
 .search-box {
     width: min(500px, 100%);
@@ -67,22 +89,35 @@ body {
     align-items: center;
 
     background: #20232d;
+
     border: 1px solid #303441;
+
     border-radius: 8px;
 
     overflow: hidden;
+
+    transition: border-color 0.2s ease;
+}
+
+
+/* Red border when input is focused */
+
+.search-box:focus-within {
+    border-color: #e50914;
 }
 
 .search-box input {
     flex: 1;
 
     min-width: 0;
+
     padding: 12px 16px;
 
     border: none;
     outline: none;
 
     background: transparent;
+
     color: #ffffff;
 
     font-size: 0.95rem;
@@ -96,10 +131,13 @@ body {
     padding: 12px 20px;
 
     border: none;
+
     background: #e50914;
-    color: white;
+
+    color: #ffffff;
 
     font-weight: 600;
+
     cursor: pointer;
 
     transition: background 0.2s ease;
@@ -110,12 +148,20 @@ body {
 }
 
 
-/* HOME */
+/* =========================================================
+   5. HOME LINK
+========================================================= */
 
 .home-link {
     color: #d7d9df;
+
     text-decoration: none;
+
     font-weight: 500;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
 }
 
 .home-link:hover {
@@ -123,42 +169,20 @@ body {
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* =========================================================
+   6. MAIN CONTAINER
+========================================================= */
 
 .main {
     width: min(1200px, 92%);
+
     margin: auto;
 }
 
-.movie-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-    margin-bottom: 10px;
-
-    color: #9da2af;
-    font-size: 0.9rem;
-}
-
-.movie-genre {
-    color: #777d8a;
-    font-size: 0.8rem;
-    line-height: 1.4;
-}
-
-.not-found {
-    color: rgb(158, 11, 11);
-    text-align: center;
-    width: 100%;
-}
-
-
-/* =========================
-   HERO
-========================= */
+/* =========================================================
+   7. HERO SECTION
+========================================================= */
 
 .hero {
     text-align: center;
@@ -168,18 +192,20 @@ body {
 
 .hero h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
+
     margin-bottom: 15px;
 }
 
 .hero p {
     color: #9da2af;
+
     font-size: 1.05rem;
 }
 
 
-/* =========================
-   MOVIE SECTION
-========================= */
+/* =========================================================
+   8. MOVIES SECTION
+========================================================= */
 
 .movies-section {
     padding-bottom: 80px;
@@ -191,6 +217,7 @@ body {
 
 .section-header h2 {
     font-size: 1.7rem;
+
     margin-bottom: 6px;
 }
 
@@ -199,69 +226,195 @@ body {
 }
 
 
-/* =========================
-   MOVIE GRID
-========================= */
+/* =========================================================
+   9. MOVIE GRID
+========================================================= */
 
 .movie-grid {
     display: grid;
 
-    grid-template-columns: repeat(auto-fill,
-            minmax(180px, 1fr));
+    grid-template-columns:
+        repeat(auto-fill, minmax(180px, 1fr));
 
     gap: 25px;
 }
 
 
-/* =========================
-   MOVIE CARD
-========================= */
+/*
+   IMPORTANT FIX
+
+   JavaScript puts the movie detail page
+   INSIDE .movie-grid.
+
+   This makes the detail page use the
+   complete available width instead of
+   becoming one small grid column.
+*/
+
+.movie-grid:has(.movie-details) {
+    display: block;
+}
+
+
+/* =========================================================
+   10. MOVIE CARD
+========================================================= */
 
 .movie-card {
     background: #191c25;
 
     border: 1px solid #292d38;
+
     border-radius: 10px;
 
     overflow: hidden;
 
+    cursor: pointer;
+
     transition:
         transform 0.25s ease,
-        border-color 0.25s ease;
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .movie-card:hover {
     transform: translateY(-6px);
+
     border-color: #e50914;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.3);
 }
+
+
+/* Movie poster */
 
 .movie-card img {
     width: 100%;
+
     height: 270px;
 
     display: block;
 
     object-fit: cover;
+
+    background: #151821;
+
+    transition: transform 0.3s ease;
 }
+
+.movie-card:hover img {
+    transform: scale(1.03);
+}
+
+
+/* Movie card information */
 
 .movie-info {
     padding: 15px;
 }
 
-.movie-title {
+
+/* Movie title */
+
+.movie-grid .movie-title {
+    color: #ffffff;
+
     font-size: 1rem;
+
     margin-bottom: 8px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
 }
 
-.movie-year {
-    color: #9298a5;
+
+/* Movie card metadata */
+
+.movie-grid .movie-meta {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    color: #9da2af;
+
     font-size: 0.9rem;
 }
 
+.movie-grid .movie-meta span {
+    display: inline-flex;
 
-/* =========================
-   FOOTER
-========================= */
+    align-items: center;
+}
+
+
+/* Movie type */
+
+.movie-grid .movie-genre {
+    color: #777d8a;
+
+    font-size: 0.8rem;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   11. NOT FOUND
+========================================================= */
+
+.not-found {
+    width: 100%;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #ff5b63;
+}
+
+.not-found h2 {
+    margin-bottom: 8px;
+
+    font-size: 1.5rem;
+}
+
+.not-found p {
+    color: #858b99;
+
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   12. LOADING
+========================================================= */
+
+.loading {
+    min-height: 400px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #8b909d;
+
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   13. FOOTER
+========================================================= */
 
 .footer {
     border-top: 1px solid #252936;
@@ -271,45 +424,923 @@ body {
     text-align: center;
 
     color: #777d8a;
+
     font-size: 0.9rem;
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =========================================================
+   ========================================================
+   MOVIE DETAILS PAGE
+   ========================================================
+========================================================= */
+
+
+/* Main detail page */
+
+.movie-details {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    isolation: isolate;
+
+    /*
+       IMPORTANT:
+       Makes the detail page span the
+       entire movie-grid width.
+    */
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   14. CINEMATIC BACKGROUND
+========================================================= */
+
+.movie-backdrop {
+    position: absolute;
+
+    inset: 0;
+
+    height: 720px;
+
+    overflow: hidden;
+
+    z-index: -2;
+}
+
+.movie-backdrop img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    /*
+       Blur the poster to create
+       a cinematic background.
+    */
+    filter: blur(20px);
+
+    transform: scale(1.12);
+
+    opacity: 0.3;
+}
+
+
+/* Dark gradient over background */
+
+.movie-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    height: 760px;
+
+    z-index: -1;
+
+    background:
+        linear-gradient(to bottom,
+            rgba(8, 9, 13, 0.45) 0%,
+            rgba(8, 9, 13, 0.75) 50%,
+            #0f1117 100%);
+}
+
+
+/* Left-side cinematic gradient */
+
+.movie-details::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 720px;
+
+    background:
+        linear-gradient(90deg,
+            rgba(8, 9, 13, 0.9),
+            rgba(8, 9, 13, 0.25) 70%,
+            transparent);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   15. MOVIE DETAIL WRAPPER
+========================================================= */
+
+.movie-detail-wrapper {
+    width: min(1200px, 92%);
+
+    margin: auto;
+
+    padding: 35px 0 100px;
+}
+
+
+/* =========================================================
+   16. BACK BUTTON
+========================================================= */
+
+.back-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 40px;
+
+    padding: 10px 16px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 8px;
+
+    color: #c5c8d0;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.back-btn:hover {
+    color: #ffffff;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    transform: translateX(-4px);
+}
+
+
+/* =========================================================
+   17. MOVIE DETAIL HERO
+========================================================= */
+
+.movie-details .movie-container {
+    display: grid;
+
+    grid-template-columns:
+        300px minmax(0, 1fr);
+
+    gap: 55px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   18. DETAIL POSTER
+========================================================= */
+
+.movie-details .movie-poster {
+    width: 100%;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: #15171e;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    animation:
+        moviePosterIn 0.55s ease both;
+}
+
+.movie-details .movie-poster:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.7);
+}
+
+.movie-details .movie-poster img {
+    width: 100%;
+
+    display: block;
+
+    aspect-ratio: 2 / 3;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   19. DETAIL CONTENT
+========================================================= */
+
+.movie-details .movie-content {
+    padding-top: 15px;
+
+    max-width: 760px;
+
+    animation:
+        movieContentIn 0.55s ease 0.08s both;
+}
+
+
+/* Movie type */
+
+.movie-type {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    margin-bottom: 14px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(229, 9, 20, 0.1);
+
+    border:
+        1px solid rgba(229, 9, 20, 0.25);
+
+    color: #ff4b55;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   20. MOVIE TITLE
+========================================================= */
+
+.movie-details .movie-title {
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-size:
+        clamp(2.5rem, 5vw, 4.8rem);
+
+    font-weight: 800;
+
+    line-height: 1.02;
+
+    letter-spacing: -2px;
+}
+
+
+/* =========================================================
+   21. DETAIL META
+========================================================= */
+
+.movie-details .movie-meta {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-bottom: 22px;
+}
+
+.movie-details .movie-meta span {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 6px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.1);
+
+    color: #c9ccd4;
+
+    font-size: 13px;
+}
+
+
+/* IMDb rating gets yellow */
+
+.movie-details .movie-meta span:nth-child(2) {
+    color: #ffd43b;
+
+    background:
+        rgba(255, 212, 59, 0.08);
+
+    border-color:
+        rgba(255, 212, 59, 0.2);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   22. GENRES
+========================================================= */
+
+.genres {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 28px;
+}
+
+.genres span {
+    padding: 7px 13px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    color: #d7d9df;
+
+    font-size: 12px;
+
+    transition: 0.2s ease;
+}
+
+.genres span:hover {
+    background:
+        rgba(255, 255, 255, 0.1);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   23. OVERVIEW
+========================================================= */
+
+.movie-overview {
+    max-width: 750px;
+
+    margin-top: 5px;
+}
+
+.movie-overview h2 {
+    margin-bottom: 10px;
+
+    color: #ffffff;
+
+    font-size: 21px;
+}
+
+.movie-overview p {
+    margin: 0;
+
+    color: #aeb2bc;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   24. ACTION BUTTONS
+========================================================= */
+
+.movie-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+.movie-actions button {
+    min-height: 45px;
+
+    padding: 0 20px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+
+/* Watch button */
+
+.watch-btn {
+    border: none;
+
+    background: #ffffff;
+
+    color: #0a0b0f;
+}
+
+.watch-btn:hover {
+    transform: translateY(-3px);
+
+    background: #eeeeee;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Watchlist button */
+
+.favorite-btn {
+    border: 1px solid #e50914;
+
+    background:
+        rgba(229, 9, 20, 0.08);
+
+    color: #ffffff;
+}
+
+.favorite-btn:hover {
+    background: #e50914;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(229, 9, 20, 0.25);
+}
+
+
+/* Watchlist active state */
+
+.favorite-btn.added {
+    background: #e50914;
+
+    border-color: #e50914;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   25. RATINGS
+========================================================= */
+
+.rating-section {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 65px;
+
+    animation:
+        movieContentIn 0.55s ease 0.15s both;
+}
+
+.rating-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    min-height: 90px;
+
+    padding: 18px 20px;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 12px;
+
+    backdrop-filter: blur(12px);
+
+    transition: 0.25s ease;
+}
+
+.rating-card:hover {
+    transform: translateY(-4px);
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    border-color:
+        rgba(255, 255, 255, 0.16);
+}
+
+
+/* Rating icon */
+
+.rating-icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    font-size: 20px;
+}
+
+
+/* Rating text */
+
+.rating-card>div:last-child {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.rating-card strong {
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+.rating-card span {
+    color: #858a96;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   26. CAST & CREW
+========================================================= */
+
+.cast-crew {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+    margin-top: 60px;
+
+    animation:
+        movieContentIn 0.55s ease 0.15s both;
+}
+
+.crew-section {
+    padding: 22px;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 12px;
+}
+
+
+/* Cast section takes full width */
+
+.crew-section:last-child {
+    grid-column: 1 / -1;
+}
+
+.crew-section h2 {
+    margin: 0 0 10px;
+
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+.crew-section p {
+    margin: 0;
+
+    color: #9da2ad;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   27. CAST
+========================================================= */
+
+.cast {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.cast span {
+    padding: 8px 11px;
+
+    background: #171a21;
+
+    border: 1px solid #292d37;
+
+    border-radius: 7px;
+
+    color: #c7cad1;
+
+    font-size: 12px;
+
+    transition: 0.2s ease;
+}
+
+.cast span:hover {
+    color: #ffffff;
+
+    border-color: #444955;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   28. MOVIE INFORMATION
+========================================================= */
+
+.movie-information {
+    margin-top: 60px;
+
+    animation:
+        movieContentIn 0.55s ease 0.15s both;
+}
+
+.movie-information>h2 {
+    margin-bottom: 20px;
+
+    color: #ffffff;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   29. DETAILS GRID
+========================================================= */
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+.detail-item {
+    min-height: 75px;
+
+    padding: 16px;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 10px;
+
+    transition: 0.2s ease;
+}
+
+.detail-item:hover {
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border-color:
+        rgba(255, 255, 255, 0.14);
+
+    transform: translateY(-2px);
+}
+
+.detail-item span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #777d89;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+.detail-item strong {
+    display: block;
+
+    color: #e1e3e8;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   30. MOVIE DETAIL ANIMATIONS
+========================================================= */
+
+@keyframes moviePosterIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0) scale(1);
+    }
+}
+
+
+@keyframes movieContentIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   31. TABLET - 900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        gap: 20px;
+    }
+
+
+    /* Movie detail layout */
+
+    .movie-details .movie-container {
+        grid-template-columns:
+            240px minmax(0, 1fr);
+
+        gap: 35px;
+    }
+
+
+    /* Smaller movie title */
+
+    .movie-details .movie-title {
+        font-size:
+            clamp(2.2rem, 6vw, 3.5rem);
+    }
+
+
+    /* Two-column information */
+
+    .details-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   32. MOBILE NAVIGATION - 700px
+========================================================= */
 
 @media (max-width: 700px) {
 
     .navbar {
         flex-wrap: wrap;
+
         padding: 15px 0;
+
         gap: 15px;
     }
+
+
+    /* Smaller logo */
 
     .logo {
         font-size: 1.3rem;
     }
 
+
+    /* Hide Home on small screens */
+
     .home-link {
         display: none;
     }
 
+
+    /* Search moves to second row */
+
     .search-box {
         order: 3;
+
         width: 100%;
     }
 
+
+    /* Smaller hero */
+
     .hero {
-        padding: 55px 10px 40px;
+        padding:
+            55px 10px 40px;
     }
 
+
+    /* Two movie cards per row */
+
     .movie-grid {
-        grid-template-columns: repeat(2,
-                minmax(0, 1fr));
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
 
         gap: 15px;
     }
+
 
     .movie-card img {
         height: 230px;
@@ -317,7 +1348,220 @@ body {
 }
 
 
+/* =========================================================
+   33. MOBILE MOVIE DETAILS - 650px
+========================================================= */
+
+@media (max-width: 650px) {
+
+    /* Smaller backdrop */
+
+    .movie-backdrop {
+        height: 600px;
+    }
+
+
+    /* Mobile overlay */
+
+    .movie-overlay {
+        height: 650px;
+
+        background:
+            linear-gradient(to bottom,
+                rgba(8, 9, 13, 0.6),
+                #0f1117 90%);
+    }
+
+
+    /* Remove side gradient */
+
+    .movie-details::before {
+        display: none;
+    }
+
+
+    /* Detail wrapper */
+
+    .movie-detail-wrapper {
+        width: 92%;
+
+        padding:
+            25px 0 70px;
+    }
+
+
+    /* Back button */
+
+    .back-btn {
+        margin-bottom: 28px;
+    }
+
+
+    /* Poster + content become vertical */
+
+    .movie-details .movie-container {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 30px;
+    }
+
+
+    /* Smaller poster */
+
+    .movie-details .movie-poster {
+        width: min(250px, 75vw);
+    }
+
+
+    /* Center detail content */
+
+    .movie-details .movie-content {
+        width: 100%;
+
+        padding: 0;
+
+        text-align: center;
+    }
+
+
+    /* Movie title */
+
+    .movie-details .movie-title {
+        font-size:
+            clamp(2rem, 10vw, 3rem);
+
+        letter-spacing: -1px;
+    }
+
+
+    /* Metadata */
+
+    .movie-details .movie-meta {
+        justify-content: center;
+
+        gap: 7px;
+    }
+
+    .movie-details .movie-meta span {
+        padding: 6px 9px;
+
+        font-size: 11px;
+    }
+
+
+    /* Genres */
+
+    .genres {
+        justify-content: center;
+    }
+
+
+    /* Overview */
+
+    .movie-overview {
+        max-width: 100%;
+    }
+
+    .movie-overview h2 {
+        font-size: 19px;
+    }
+
+    .movie-overview p {
+        font-size: 14px;
+
+        line-height: 1.75;
+    }
+
+
+    /* Buttons */
+
+    .movie-actions {
+        justify-content: center;
+    }
+
+    .movie-actions button {
+        flex: 1;
+
+        min-width: 140px;
+    }
+
+
+    /* =====================================================
+       RATINGS
+    ===================================================== */
+
+    .rating-section {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+
+        margin-top: 45px;
+    }
+
+    .rating-card {
+        min-height: 75px;
+    }
+
+
+    /* =====================================================
+       CAST & CREW
+    ===================================================== */
+
+    .cast-crew {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        margin-top: 45px;
+    }
+
+    .crew-section:last-child {
+        grid-column: auto;
+    }
+
+    .crew-section {
+        text-align: left;
+    }
+
+
+    /* =====================================================
+       MOVIE INFORMATION
+    ===================================================== */
+
+    .movie-information {
+        margin-top: 45px;
+    }
+
+    .details-grid {
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 9px;
+    }
+
+    .detail-item {
+        padding: 13px;
+
+        min-height: 70px;
+    }
+
+    .detail-item strong {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   34. SMALL PHONES - 400px
+========================================================= */
+
 @media (max-width: 400px) {
+
+    /* One movie card per row */
 
     .movie-grid {
         grid-template-columns: 1fr;
@@ -325,5 +1569,63 @@ body {
 
     .movie-card img {
         height: 350px;
+    }
+
+
+    /* Smaller detail poster */
+
+    .movie-details .movie-poster {
+        width: 210px;
+    }
+
+
+    /* Smaller title */
+
+    .movie-details .movie-title {
+        font-size: 1.9rem;
+    }
+
+
+    /* Stack buttons */
+
+    .movie-details .movie-actions {
+        flex-direction: column;
+    }
+
+    .movie-details .movie-actions button {
+        width: 100%;
+    }
+
+
+    /* One information card per row */
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .rating-card {
+        padding: 15px;
+    }
+}
+
+
+/* =========================================================
+   35. REDUCED MOTION
+   Helps users who prefer less animation.
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

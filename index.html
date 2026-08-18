@@ -2,67 +2,114 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Search and discover your favorite movies">
+    <meta name="description" content="Search and discover movies, ratings, genres, cast and more.">
 
-    <title>MovieFinder | Search Movies</title>
+    <meta name="theme-color" content="#0f1117">
+
+    <title>MovieFinder | Discover Movies</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="movie.css">
+
 </head>
+
 
 <body>
 
     <header class="header">
-        <nav class="navbar">
 
-            <a href="#" class="logo">
+        <nav class="navbar" aria-label="Main navigation">
+
+
+
+
+            <a href="#" class="logo" aria-label="MovieFinder Home">
                 MovieFinder
             </a>
 
-            <form class="search-box">
+
+
+
+            <form class="search-box" id="searchForm">
+
                 <input class="search-input" type="search" id="movieSearch" placeholder="Search movies..."
-                    autocomplete="off">
+                    autocomplete="off" aria-label="Search movies">
 
                 <button type="submit" id="searchBtn">
                     Search
                 </button>
+
             </form>
 
-            <div class="home-link">Home</div>
+
+            <a href="#" class="home-link">
+                Home
+            </a>
+
 
         </nav>
+
     </header>
 
 
     <main class="main">
 
-        <section class="hero">
-            <h1>Find Your Next Movie</h1>
-            <p>Search for movies, ratings, genres and more.</p>
+
+
+        <section class="hero" aria-labelledby="heroTitle">
+
+            <h1 id="heroTitle">
+                Find Your Next Movie
+            </h1>
+
+            <p>
+                Search for movies, ratings, genres and more.
+            </p>
+
         </section>
 
-        <section class="movies-section">
+
+        <section class="movies-section" aria-labelledby="moviesTitle">
+
 
             <div class="section-header">
-                <h2>Movies</h2>
-                <p id="resultText">Search for a movie to get started</p>
+
+                <h2 id="moviesTitle">
+                    Movies
+                </h2>
+
+                <p id="resultText">
+                    Search for a movie to get started
+                </p>
+
             </div>
+
+
 
             <div class="movie-grid" id="movieContainer">
-                <!-- Movie cards will be added using JavaScript -->
+
+
 
             </div>
 
+
         </section>
+
 
     </main>
 
 
+
     <footer class="footer">
-        <p>© 2026 MovieFinder. Built with JavaScript.</p>
+
+        <p>
+            © 2026 MovieFinder. Built with JavaScript.
+        </p>
+
     </footer>
 
     <script src="script.js"></script>
