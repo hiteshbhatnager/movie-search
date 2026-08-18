@@ -11,42 +11,49 @@ searchBox.addEventListener('input', (e) => {
     let value = e.target.value
 
     wait = setTimeout(() => {
-        if (value) {
-            api(value)
+        if (!value.trim()) {
             grid.innerHTML = ""
+            return
         }
-    }, 900)
+        api(value)
+        grid.innerHTML = `<div class="loading">Searching movies...</div>`;
+    }, 600)
 })
 
 function api(movie) {
-    fetch(`https://omdbapi.com/?s=${movie}&apikey=${API_KEY}`)
+    fetch(`https://omdbapi.com/?s=${encodeURIComponent(movie)}&apikey=${API_KEY}`)
         .then((res) => res.json())
         .then((res) => {
-            const movieList = res.Search?.map((movie) => (
-                `
-                <div class="movie-card" data-id="${movie.imdbID}" >
-                    <img src="${movie.Poster}"
-                        alt="${movie.Title}">
-
-                    <div class="movie-info">
-                        <h3 class="movie-title">${movie.Title}</h3>
-
-                        <div class="movie-meta">
-                            <span>${movie.Year}</span>
-                            <span>⭐ ${movie.imdbID}</span>
-                        </div>
-
-                        <p class="movie-genre">
-                            ${movie.Type}
-                        </p>
-                    </div>
-                </div>
-            `
-            )).join("")
-            if (movieList) {
-                grid.innerHTML = movieList
+            if (res.Response === "False") {
+                grid.innerHTML = `<div class="not-found">${res.Error}</div>`;
+                return;
             } else {
-                grid.innerHTML = `<div class="not-found">${movie} not exist</div>`
+                const movieList = res.Search?.map((movie) => (
+                    `
+                    <div class="movie-card" data-id="${movie.imdbID}" >
+                        <img src="${movie.Poster}"
+                            alt="${movie.Title}">
+    
+                        <div class="movie-info">
+                            <h3 class="movie-title">${movie.Title}</h3>
+    
+                            <div class="movie-meta">
+                                <span>${movie.Year}</span>
+                                <span>⭐ ${movie.imdbID}</span>
+                            </div>
+    
+                            <p class="movie-genre">
+                                ${movie.Type}
+                            </p>
+                        </div>
+                    </div>
+                `
+                )).join("")
+                if (movieList) {
+                    grid.innerHTML = movieList
+                } else {
+                    grid.innerHTML = `<div class="not-found">${movie} not exist</div>`
+                }
             }
 
             searchBox.value = ""
